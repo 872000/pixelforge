@@ -1,0 +1,17 @@
+# build trees
+build/
+cmake-build-*/
+
+# compiled objects
+*.o
+*.a
+
+# test outputs
+*.bmp
+*.ppm
+!docs/*.png
+
+# editor / OS noise
+.DS_Store
+.vscode/
+*.swp
