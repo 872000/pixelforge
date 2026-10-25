@@ -174,6 +174,13 @@ void op_sobel_detects_step_edge() {
     CHECK(e.at(4, 2)[0] == 0);
 }
 
+void op_grayscale_idempotent() {
+    // Grayscale output is already gray, so a second pass must be a no-op.
+    pf::Image gray = pf::grayscale(make_2x2());
+    pf::Image twice = pf::grayscale(gray);
+    CHECK(twice.px == gray.px);
+}
+
 void op_resize_corners_preserved() {
     pf::Image img = make_2x2();
     pf::Image big = pf::resize_bilinear(img, 4, 4);
@@ -293,6 +300,7 @@ void codec_ppm_reads_comments() {
 int main() {
     std::cout << "pixelforge tests\n";
     RUN(op_grayscale_known_values);
+    RUN(op_grayscale_idempotent);
     RUN(op_invert_known_values);
     RUN(op_brightness_clamps);
     RUN(op_contrast_identity);
